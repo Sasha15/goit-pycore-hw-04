@@ -100,14 +100,17 @@ def handle_command(command:str):
 def main():
     load_contacts()
     print_colored("Welcome to the assistant bot!", "info")
-    while True:
-        try:
-            command = input(Fore.YELLOW + "Enter a command: " + Style.RESET_ALL)
-            response = handle_command(command)
-            if response:
-                print_colored(response, "success" if "✅" in response or "🔄" in response else "error" if "❌" in response else "info")
-        except Exception as e:
-            print_colored(f"Error: {e}", "error")
+    try:
+        while True:
+            try:
+                command = input(Fore.YELLOW + "Enter a command: " + Style.RESET_ALL)
+                response = handle_command(command)
+                if response:
+                    print_colored(response, "success" if "✅" in response or "🔄" in response else "error" if "❌" in response else "info")
+            except Exception as e:
+                print_colored(f"Error: {e}", "error")
+    except KeyboardInterrupt:
+        exit_handler()
 
 if __name__ == '__main__':
     main()
